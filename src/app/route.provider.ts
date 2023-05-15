@@ -15,6 +15,13 @@ function configureRoutes(routesService: RoutesService) {
         order: 1,
         layout: eLayoutType.application,
       },
+      {
+        path: '/bolumler',
+        name: 'Bolumler',
+        iconClass: 'fas fa-home',
+        order: 2,
+        layout: eLayoutType.application,
+      },
     ]);
   };
 }
