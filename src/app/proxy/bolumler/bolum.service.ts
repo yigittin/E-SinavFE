@@ -35,10 +35,11 @@ export class BolumService {
     { apiName: this.apiName,...config });
   
 
-  getBolumlerInfo = (config?: Partial<Rest.Config>) =>
+  getBolumlerInfoBySkipCountAndMaxResultCountAndSortingAndFilter = (skipCount: number, maxResultCount: number, sorting: string, filter?: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, BolumInfoDto[]>({
       method: 'GET',
       url: '/api/app/bolum/bolumler-info',
+      params: { skipCount, maxResultCount, sorting, filter },
     },
     { apiName: this.apiName,...config });
   
@@ -48,6 +49,24 @@ export class BolumService {
       method: 'GET',
       url: '/api/app/bolum',
       params: { sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getPagedBolumlerByInputAndFilter = (input: PagedAndSortedResultRequestDto, filter?: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, PagedResultDto<BolumInfoDto>>({
+      method: 'GET',
+      url: '/api/app/bolum/paged-bolumler',
+      params: { sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount, filter },
+    },
+    { apiName: this.apiName,...config });
+  
+
+  newBolumByInput = (input: CreateUpdateBolumDto, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, BolumInfoDto>({
+      method: 'POST',
+      url: '/api/app/bolum/new-bolum',
+      body: input,
     },
     { apiName: this.apiName,...config });
   

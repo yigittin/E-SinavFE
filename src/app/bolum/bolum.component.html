@@ -6,15 +6,58 @@
           Bölümler
         </h5>
       </div>
-      <div class="text-end col col-md-6"></div>
+      <div class="text-end col col-md-6">
+        <div class="text-lg-end pt-2">
+          <button id="create" class="btn btn-primary" type="button" (click)="createBook()">
+            <i class="fa fa-plus me-1"></i>
+            <span>{{ "::NewBook" | abpLocalization }}</span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
   <div class="card-body">
     <ngx-datatable [rows]="bolum.items" [count]="bolum.totalCount" [list]="list" default>
-      <ngx-datatable-column [name]="'::Name' | abpLocalization" prop="name"></ngx-datatable-column>
-        <ng-template let-row="row" ngx-datatable-cell-template>
+      <ngx-datatable-column [name]="'Bölüm Adı'" prop="bolumAdi"></ngx-datatable-column>
+      <ngx-datatable-column [name]="'Oluşturan Kullanıcı'" prop="creatorUserName"></ngx-datatable-column>
+      <ngx-datatable-column [name]="'Onaylayan Kullanıcı'" prop="bolumOnayciAdi"></ngx-datatable-column>
+      <ngx-datatable-column [name]="'Onaylandı Mı?'" prop="isOnaylandi"></ngx-datatable-column>
+      <!-- id?: string;
+      bolumAdi?: string;
+      isOnaylandi: boolean;
+      creatorId?: string;
+      creatorUserName?: string;
+      bolumOnayciAdi?: string; -->
+        <!-- <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row.publishDate | date }}
-        </ng-template>
+        </ng-template> -->
     </ngx-datatable>
   </div>
 </div>
+
+
+<abp-modal [(visible)]="isModalOpen">
+  <ng-template #abpHeader>
+    <h3>{{ 'Yeni Bölüm' | abpLocalization }}</h3>
+  </ng-template>
+
+  <ng-template #abpBody>
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div class="mt-2">
+        <label for="bolum-BolumAdi">Bölüm Adı</label><span> * </span>
+        <input type="text" id="bolum-BolumAdi" class="form-control" formControlName="bolumAdi" autofocus />
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template #abpFooter>
+    <button type="button" class="btn btn-secondary" abpClose>
+      {{ '::Close' | abpLocalization }}
+    </button>
+
+    <button class="btn btn-primary" (click)="save()" [disabled]="form.invalid">
+      <i class="fa fa-check mr-1"></i>
+      {{ '::Save' | abpLocalization }}
+</button>
+  </ng-template>
+</abp-modal>
