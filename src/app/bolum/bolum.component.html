@@ -37,9 +37,12 @@
             <button *abpPermission="'SanalVaka.Bolumler.Edit'" ngbDropdownItem (click)="editBolum(row.id)">
               {{ '::Edit' | abpLocalization }}
             </button>
-            <!-- <button *abpPermission="'SanalVaka.Bolum.Delete'" ngbDropdownItem (click)="delete(row.id)">
+            <button *abpPermission="'SanalVaka.Bolumler.Edit'" ngbDropdownItem (click)="onaylama(row.id)">
+              {{ 'Onayla' | abpLocalization }}
+            </button>
+            <button *abpPermission="'SanalVaka.Bolumler.Delete'" ngbDropdownItem (click)="delete(row.id)">
               {{ '::Delete' | abpLocalization }}
-            </button> -->
+            </button>
           </div>
         </div>
       </ng-template>

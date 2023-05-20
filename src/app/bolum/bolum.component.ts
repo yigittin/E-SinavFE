@@ -2,6 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { ListService,PagedResultDto } from '@abp/ng.core';
 import { BolumService,BolumDto,BolumInfoDto } from '@proxy/bolumler';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'; // add this
+import { ConfirmationService,Confirmation } from '@abp/ng.theme.shared';
 @Component({
   selector:'app-bolum',
   templateUrl:'./bolum.component.html',
@@ -13,7 +14,10 @@ export class BolumComponent {
   form: FormGroup;
   isModalOpen = false; 
   selectedBolum= {} as BolumInfoDto;
-  constructor(public readonly list: ListService,private bolumService:BolumService,private fb:FormBuilder){}
+  constructor(public readonly list: ListService,
+    private bolumService:BolumService,
+    private fb:FormBuilder,
+    private confirmation: ConfirmationService){}
   ngOnInit(){
     const bolumStreamCreator=(query)=>this.bolumService.getPagedBolumlerByInputAndFilter(query);
     this.list.hookToQuery(bolumStreamCreator).subscribe((response)=>{
@@ -62,6 +66,22 @@ export class BolumComponent {
           this.list.get();
         })
       }
+    }
+    delete(id: string) {
+      this.confirmation.warn('::AreYouSureToDelete', '::AreYouSure')
+          .subscribe((status) => {
+            if (status === Confirmation.Status.confirm) {
+              this.bolumService.delete(id).subscribe(() => this.list.get());
+            }
+        });
+    }
+    onaylama(id:string){
+      this.confirmation.warn('Onaylıyorsunuz', 'Emin misiniz?')
+          .subscribe((status) => {
+            if (status === Confirmation.Status.confirm) {
+              this.bolumService.onaylaBolumById(id).subscribe(() => this.list.get());
+            }
+        });
     }
 }
 
