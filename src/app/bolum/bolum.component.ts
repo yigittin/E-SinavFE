@@ -12,24 +12,34 @@ export class BolumComponent {
   bolum={items:[],totalCount:0} as PagedResultDto<BolumInfoDto>;
   form: FormGroup;
   isModalOpen = false; 
+  selectedBolum= {} as BolumInfoDto;
   constructor(public readonly list: ListService,private bolumService:BolumService,private fb:FormBuilder){}
   ngOnInit(){
     const bolumStreamCreator=(query)=>this.bolumService.getPagedBolumlerByInputAndFilter(query);
-
     this.list.hookToQuery(bolumStreamCreator).subscribe((response)=>{
       this.bolum=response;
     })
   }
     // add new method
-    createBook() {
+    createBolum() {
+      this.selectedBolum = {} as BolumInfoDto;
       this.buildForm();
       this.isModalOpen = true;
     }
+    editBolum(id: string) {
+      this.bolumService.getBolumSingleById(id).subscribe((Bolum) => {
+        this.selectedBolum = Bolum;
+        this.buildForm();
+        this.isModalOpen = true;
+      });
+    }
+  
 
     buildForm(){
       this.form=this.fb.group({
-        bolumAdi:['',Validators.required],
-        isOnaylandi: false
+        bolumAdi:[this.selectedBolum.bolumAdi||'',Validators.required],
+        isOnaylandi: false,
+        id:[this.selectedBolum.id || null]
       })
     }
 
@@ -37,12 +47,21 @@ export class BolumComponent {
       if(this.form.invalid){
         return;
       }
-
-      this.bolumService.newBolumByInput(this.form.value).subscribe(()=>{
-        this.isModalOpen=false;
-        this.form.reset();
-        this.list.get();
-      })
+      
+      
+      if(this.selectedBolum.id){
+        this.bolumService.updateBolumByInput(this.form.value).subscribe(()=>{
+          this.isModalOpen=false;
+          this.form.reset();
+          this.list.get();
+        })
+      }else{
+        this.bolumService.newBolumByInput(this.form.value).subscribe(()=>{
+          this.isModalOpen=false;
+          this.form.reset();
+          this.list.get();
+        })
+      }
     }
 }
 

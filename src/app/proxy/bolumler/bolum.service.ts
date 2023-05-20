@@ -1,4 +1,4 @@
-import type { BolumDto, BolumInfoDto, CreateUpdateBolumDto } from './models';
+import type { BolumDropDownDto, BolumDto, BolumInfoDto, CreateUpdateBolumDto, UpdateBolumDto } from './models';
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
@@ -31,6 +31,22 @@ export class BolumService {
     this.restService.request<any, BolumDto>({
       method: 'GET',
       url: `/api/app/bolum/${id}`,
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getBolumDropdown = (config?: Partial<Rest.Config>) =>
+    this.restService.request<any, BolumDropDownDto[]>({
+      method: 'GET',
+      url: '/api/app/bolum/bolum-dropdown',
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getBolumSingleById = (id: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, BolumInfoDto>({
+      method: 'GET',
+      url: `/api/app/bolum/${id}/bolum-single`,
     },
     { apiName: this.apiName,...config });
   
@@ -71,11 +87,36 @@ export class BolumService {
     { apiName: this.apiName,...config });
   
 
+  onaylaBolumById = (id: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, void>({
+      method: 'POST',
+      url: `/api/app/bolum/${id}/onayla-bolum`,
+    },
+    { apiName: this.apiName,...config });
+  
+
   update = (id: string, input: CreateUpdateBolumDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, BolumDto>({
       method: 'PUT',
       url: `/api/app/bolum/${id}`,
       body: input,
+    },
+    { apiName: this.apiName,...config });
+  
+
+  updateBolumByInput = (input: UpdateBolumDto, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, BolumInfoDto>({
+      method: 'PUT',
+      url: '/api/app/bolum/bolum',
+      body: input,
+    },
+    { apiName: this.apiName,...config });
+  
+
+  yetkiliAtaByIdAndKullaniciId = (id: string, kullaniciId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, void>({
+      method: 'POST',
+      url: `/api/app/bolum/${id}/yetkili-ata/${kullaniciId}`,
     },
     { apiName: this.apiName,...config });
 

@@ -1,5 +1,10 @@
 import type { AuditedEntityDto } from '@abp/ng.core';
 
+export interface BolumDropDownDto {
+  id?: string;
+  bolumAdi?: string;
+}
+
 export interface BolumDto extends AuditedEntityDto<string> {
   name?: string;
   isOnaylandi: boolean;
@@ -17,4 +22,9 @@ export interface BolumInfoDto {
 export interface CreateUpdateBolumDto {
   bolumAdi: string;
   isOnaylandi: boolean;
+}
+
+export interface UpdateBolumDto {
+  id?: string;
+  bolumAdi?: string;
 }
