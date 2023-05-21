@@ -34,21 +34,21 @@
                   <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
                 </button>
                 <div ngbDropdownMenu>
-                  <button *abpPermission="'SanalVaka.Dersler.Edit'" ngbDropdownItem (click)="editBolum(row.id)">
+                  <button *abpPermission="'SanalVaka.Dersler.Edit'" ngbDropdownItem (click)="editDers(row.id)">
                     {{ '::Edit' | abpLocalization }}
                   </button>
-                  <!-- <button *abpPermission="'SanalVaka.Dersler.Edit'" ngbDropdownItem (click)="onaylama(row.id)">
+                  <button *abpPermission="'SanalVaka.Dersler.Edit'" ngbDropdownItem (click)="onaylama(row.id)">
                     {{ 'Onayla' | abpLocalization }}
-                  </button> -->
-                  <!-- <button *abpPermission="'SanalVaka.Dersler.Delete'" ngbDropdownItem (click)="delete(row.id)">
+                  </button>
+                  <button *abpPermission="'SanalVaka.Dersler.Delete'" ngbDropdownItem (click)="delete(row.id)">
                     {{ '::Delete' | abpLocalization }}
-                  </button> -->
+                  </button>
                 </div>
               </div>
             </ng-template>
           </ngx-datatable-column>
             <ngx-datatable-column [name]="'Ders Adı'" prop="dersAdi"></ngx-datatable-column>
-            <ngx-datatable-column [name]="'Bölüm'" prop="bolumAdi"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'Bölüm'" prop="bolumName"></ngx-datatable-column>
             <ngx-datatable-column [name]="'Oluşturan Kullanıcı'" prop="creatorUserName"></ngx-datatable-column>
             <ngx-datatable-column [name]="'Onaylayan Kullanıcı'" prop="dersOnayciAdi"></ngx-datatable-column>
             <ngx-datatable-column [name]="'Onaylandı Mı?'" prop="isOnaylandi"></ngx-datatable-column>
@@ -70,22 +70,23 @@
 
 <abp-modal [(visible)]="isModalOpen">
     <ng-template #abpHeader>
-        <h3>{{ (selectedBolum.id ? '::Edit' : 'Yeni Ders') | abpLocalization }}</h3>
+        <h3>{{ (selectedDers.id ? '::Edit' : 'Yeni Ders') | abpLocalization }}</h3>
     </ng-template>
     <ng-template #abpBody>
         <form [formGroup]="form" (ngSubmit)="save()">
-            <div class="form-group">
-                
-            </div>
-            <div class="mt-2">
-                <label for="ders-bolumId">Bölüm</label><span> * </span>
-                <select class="form-control" id="ders-bolumId" formControlName="type">
-                  <option [ngValue]="null">Bölüm seçiniz</option>
-                  <option [ngValue]="bolum.id" *ngFor="let bolum of bolumList"> {{ bolum.bolumAdi | abpLocalization }}</option>
-                </select>
-              </div>
+          <div class="form-group">
+            <label for="ders-dersAdi">Ders Adı</label><span> * </span>
+            <input type="text" id="ders-dersAdi" class="form-control" formControlName="dersAdi" autofocus />
+          </div>
+          <div class="mt-2">
+            <label for="ders-bolumId">Bölüm</label><span> * </span>
+            <select class="form-control" id="ders-bolumId" formControlName="bolumId">
+              <option [ngValue]="null">Bölüm seçiniz</option>
+              <option [ngValue]="bolum.id" *ngFor="let bolum of bolumList"> {{ bolum.bolumAdi | abpLocalization }}</option>
+            </select>
+          </div>
         </form>
-    </ng-template>>
+    </ng-template>
 
     <ng-template #abpFooter>
         <button type="button" class="btn btn-secondary" abpClose>

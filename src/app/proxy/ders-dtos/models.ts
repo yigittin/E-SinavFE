@@ -1,5 +1,4 @@
 import type { IdentityUserDto } from '../volo/abp/identity/models';
-import type { SinifDto } from '../sinif-dtos/models';
 import type { AuditedEntityDto } from '@abp/ng.core';
 
 export interface DersInfoDto {
@@ -19,7 +18,6 @@ export interface DersInfoDto {
 export interface CreateUpdateDersDto {
   dersAdi: string;
   bolumId: string;
-  sinifList: SinifDto[];
 }
 
 export interface DersDto extends AuditedEntityDto<string> {
@@ -33,7 +31,6 @@ export interface UpdateDersDto {
   id: string;
   dersAdi: string;
   bolumId: string;
-  sinifList: SinifDto[];
   yetkiliId: string[];
-  yetkililer: IdentityUserDto[];
+  isOnaylandi: boolean;
 }

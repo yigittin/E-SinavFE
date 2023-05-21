@@ -48,15 +48,41 @@ export class DersComponent {
       this.isModalOpen=true;
     }
 
+    editDers(id:string){
+      this.getBolumList();
+      this.dersService.getDersSingleByIdById(id).subscribe((Ders)=>{
+        this.selectedDers=Ders;
+        this.buildForm();
+        this.isModalOpen=true;
+      });
+    }
     buildForm(){
       this.form=this.fb.group({
         dersAdi:[this.selectedDers.dersAdi||'',Validators.required],
-        isOnaylandi:false,
-        bolumId:['',Validators.required],
-        yetkiliId:[]
+        isOnaylandi:[this.selectedDers.isOnaylandi||false],
+        bolumId:[this.selectedDers.bolumId||'',Validators.required],
+        yetkiliId:[],
+        id:[this.selectedDers.id||null]
       })
     }
 
+    delete(id:string){
+      this.confirmation.warn('::AreYouSureToDelete', '::AreYouSure')
+        .subscribe((status)=>{
+          if(status===Confirmation.Status.confirm){
+            this.dersService.delete(id).subscribe(()=>this.list.get());
+          }
+        })
+    }
+
+    onaylama(id:string){
+      this.confirmation.info('Onaylıyorsunuz','Emin misiniz?')
+        .subscribe((status)=>{
+          if(status===Confirmation.Status.confirm){
+            this.dersService.dersOnaylaByGuidDers(id).subscribe(()=>this.list.get());
+          }
+        })
+    }
 
     save(){
       if(this.form.invalid){
@@ -64,7 +90,7 @@ export class DersComponent {
       }
       
       if(this.selectedDers.id){
-        this.dersService.updateDersByInput(this.form.value).subscribe(()=>{
+        this.dersService.updateDersInfoByInput(this.form.value).subscribe(()=>{
           this.isModalOpen=false;
           this.form.reset();
           this.list.get();

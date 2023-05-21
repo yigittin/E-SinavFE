@@ -70,6 +70,14 @@ export class DersService {
     { apiName: this.apiName,...config });
   
 
+  getDersSingleByIdById = (id: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, DersInfoDto>({
+      method: 'GET',
+      url: `/api/app/ders/${id}/ders-single-by-id`,
+    },
+    { apiName: this.apiName,...config });
+  
+
   getList = (input: PagedAndSortedResultRequestDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, PagedResultDto<DersDto>>({
       method: 'GET',
@@ -120,6 +128,15 @@ export class DersService {
     this.restService.request<any, void>({
       method: 'PUT',
       url: '/api/app/ders/ders',
+      body: input,
+    },
+    { apiName: this.apiName,...config });
+  
+
+  updateDersInfoByInput = (input: UpdateDersDto, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, void>({
+      method: 'PUT',
+      url: '/api/app/ders/ders-info',
       body: input,
     },
     { apiName: this.apiName,...config });

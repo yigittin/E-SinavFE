@@ -42,7 +42,7 @@ export class BolumComponent {
     buildForm(){
       this.form=this.fb.group({
         bolumAdi:[this.selectedBolum.bolumAdi||'',Validators.required],
-        isOnaylandi: false,
+        isOnaylandi: [this.selectedBolum.isOnaylandi||false],
         id:[this.selectedBolum.id || null]
       })
     }
