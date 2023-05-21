@@ -22,6 +22,13 @@ function configureRoutes(routesService: RoutesService) {
         order: 2,
         layout: eLayoutType.application,
       },
+      {
+        path: '/dersler',
+        name: 'Dersler',
+        iconClass: 'fas fa-home',
+        order: 3,
+        layout: eLayoutType.application,
+      },
     ]);
   };
 }

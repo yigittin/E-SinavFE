@@ -1,7 +1,7 @@
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
-import type { CreateUpdateDersDto, DersDto, DersInfoDto } from '../ders-dtos/models';
+import type { CreateUpdateDersDto, DersDto, DersInfoDto, UpdateDersDto } from '../ders-dtos/models';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +14,15 @@ export class DersService {
     this.restService.request<any, DersDto>({
       method: 'POST',
       url: '/api/app/ders',
+      body: input,
+    },
+    { apiName: this.apiName,...config });
+  
+
+  createDersByInput = (input: CreateUpdateDersDto, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, void>({
+      method: 'POST',
+      url: '/api/app/ders/ders',
       body: input,
     },
     { apiName: this.apiName,...config });
@@ -44,10 +53,19 @@ export class DersService {
     { apiName: this.apiName,...config });
   
 
-  getDersInfo = (config?: Partial<Rest.Config>) =>
+  getDersDropdown = (config?: Partial<Rest.Config>) =>
+    this.restService.request<any, DersInfoDto[]>({
+      method: 'GET',
+      url: '/api/app/ders/ders-dropdown',
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getDersInfoBySkipCountAndMaxResultCountAndSortingAndFilter = (skipCount: number, maxResultCount: number, sorting: string = "DersAdi", filter?: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, DersInfoDto[]>({
       method: 'GET',
       url: '/api/app/ders/ders-info',
+      params: { skipCount, maxResultCount, sorting, filter },
     },
     { apiName: this.apiName,...config });
   
@@ -57,6 +75,15 @@ export class DersService {
       method: 'GET',
       url: '/api/app/ders',
       params: { sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getPagedDerslerByInputAndFilter = (input: PagedAndSortedResultRequestDto, filter?: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, PagedResultDto<DersInfoDto>>({
+      method: 'GET',
+      url: '/api/app/ders/paged-dersler',
+      params: { sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount, filter },
     },
     { apiName: this.apiName,...config });
   
@@ -85,6 +112,25 @@ export class DersService {
       method: 'PUT',
       url: `/api/app/ders/${id}`,
       body: input,
+    },
+    { apiName: this.apiName,...config });
+  
+
+  updateDersByInput = (input: UpdateDersDto, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, void>({
+      method: 'PUT',
+      url: '/api/app/ders/ders',
+      body: input,
+    },
+    { apiName: this.apiName,...config });
+  
+
+  yetkiliEkleByDersIdAndYetkiliId = (dersId: string, yetkiliId: string[], config?: Partial<Rest.Config>) =>
+    this.restService.request<any, void>({
+      method: 'POST',
+      url: '/api/app/ders/yetkili-ekle',
+      params: { dersId },
+      body: yetkiliId,
     },
     { apiName: this.apiName,...config });
 
