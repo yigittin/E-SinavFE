@@ -27,6 +27,7 @@ const routes: Routes = [
   },
   { path: 'bolumler', loadChildren: () => import('./bolum/bolum.module').then(m => m.BolumModule) },
   { path: 'dersler', loadChildren: () => import('./ders/ders.module').then(m => m.DersModule) },
+  { path: 'ogrenciler', loadChildren: () => import('./ogrenci/ogrenci.module').then(m => m.OgrenciModule) },
 ];
 
 @NgModule({
