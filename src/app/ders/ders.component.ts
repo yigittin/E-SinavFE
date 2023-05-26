@@ -2,31 +2,35 @@ import { ListService, PagedResultDto } from '@abp/ng.core';
 import { IdentityUserService } from '@abp/ng.identity/proxy';
 import { Confirmation, ConfirmationService } from '@abp/ng.theme.shared';
 import { query } from '@angular/animations';
-import { Component } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BolumDropDownDto, BolumService } from '@proxy/bolumler';
 import type { IdentityUserDto } from '@proxy/volo/abp/identity';
 import { DersInfoDto } from '@proxy/ders-dtos';
 import { DersService } from '@proxy/dersler';
+import { DersDetayModule } from '../ders-detay/ders-detay.module';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-ders',
   templateUrl: './ders.component.html',
   styleUrls: ['./ders.component.scss'],
-  providers:[ListService]
+  providers:[ListService],
 })
-export class DersComponent {
+export class DersComponent implements OnInit {
     ders={items:[],totalCount:0} as PagedResultDto<DersInfoDto>;
     form:FormGroup;
     isModalOpen=false;
     selectedDers={} as DersInfoDto;
     bolumList:BolumDropDownDto[];
     constructor(
+      injector:Injector,
       public readonly list:ListService,
       private dersService:DersService,
       private bolumService:BolumService,
       private fb:FormBuilder,
-      private confirmation:ConfirmationService
+      private confirmation:ConfirmationService,
+      private route:ActivatedRoute
     ){}
 
     ngOnInit(){

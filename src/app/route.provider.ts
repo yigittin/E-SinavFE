@@ -28,7 +28,7 @@ function configureRoutes(routesService: RoutesService) {
         iconClass: 'fas fa-home',
         order: 3,
         layout: eLayoutType.application,
-      },
+      }
     ]);
   };
 }

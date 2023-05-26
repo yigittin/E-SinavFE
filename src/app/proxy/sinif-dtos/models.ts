@@ -1,4 +1,4 @@
-import type { OgrenciDto } from '../ogrenci-dtos/models';
+import type { OgrenciDto, OgrenciSelectionDto } from '../ogrenci-dtos/models';
 import type { SinifYetkiliDto } from '../yetkili-dtos/models';
 import type { AuditedEntityDto } from '@abp/ng.core';
 
@@ -29,7 +29,7 @@ export interface SinifInfoDto {
   dersAdi?: string;
   isOnaylandi: boolean;
   onaylayanKullaniciAdi?: string;
-  ogrenciList: OgrenciDto[];
+  ogrenciList: OgrenciSelectionDto[];
   yetkiliList: SinifYetkiliDto[];
   creatorUserName?: string;
   creatorId?: string;

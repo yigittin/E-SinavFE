@@ -2,6 +2,8 @@ import { RestService, Rest } from '@abp/ng.core';
 import type { PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
 import type { CreateUpdateDersDto, DersDto, DersInfoDto, UpdateDersDto } from '../ders-dtos/models';
+import type { OgrenciSelectionDto } from '../ogrenci-dtos/models';
+import type { SinifInfoDto } from '../sinif-dtos/models';
 
 @Injectable({
   providedIn: 'root',
@@ -70,10 +72,26 @@ export class DersService {
     { apiName: this.apiName,...config });
   
 
+  getDersOgrenciListByDersId = (dersId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, OgrenciSelectionDto[]>({
+      method: 'GET',
+      url: `/api/app/ders/ders-ogrenci-list/${dersId}`,
+    },
+    { apiName: this.apiName,...config });
+  
+
   getDersSingleByIdById = (id: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, DersInfoDto>({
       method: 'GET',
       url: `/api/app/ders/${id}/ders-single-by-id`,
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getDersSiniflarByDersId = (dersId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, SinifInfoDto[]>({
+      method: 'GET',
+      url: `/api/app/ders/ders-siniflar/${dersId}`,
     },
     { apiName: this.apiName,...config });
   
@@ -87,6 +105,14 @@ export class DersService {
     { apiName: this.apiName,...config });
   
 
+  getOgrenciListByDersId = (dersId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, OgrenciSelectionDto[]>({
+      method: 'GET',
+      url: `/api/app/ders/ogrenci-list/${dersId}`,
+    },
+    { apiName: this.apiName,...config });
+  
+
   getPagedDerslerByInputAndFilter = (input: PagedAndSortedResultRequestDto, filter?: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, PagedResultDto<DersInfoDto>>({
       method: 'GET',
@@ -96,7 +122,7 @@ export class DersService {
     { apiName: this.apiName,...config });
   
 
-  ogrenciEkleMultiByListAndGuidSinif = (list: number[], guidSinif: string, config?: Partial<Rest.Config>) =>
+  ogrenciEkleMultiByListAndGuidSinif = (list: string[], guidSinif: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, void>({
       method: 'POST',
       url: '/api/app/ders/ogrenci-ekle-multi',
@@ -106,11 +132,19 @@ export class DersService {
     { apiName: this.apiName,...config });
   
 
-  ogrenciEkleSingleByGuidSinifAndOgrenciId = (guidSinif: string, ogrenciId: number, config?: Partial<Rest.Config>) =>
+  ogrenciEkleSingleByGuidSinifAndOgrenciId = (guidSinif: string, ogrenciId: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, void>({
       method: 'POST',
       url: `/api/app/ders/ogrenci-ekle-single/${ogrenciId}`,
       params: { guidSinif },
+    },
+    { apiName: this.apiName,...config });
+  
+
+  ogrenciRepoGuncelle = (config?: Partial<Rest.Config>) =>
+    this.restService.request<any, void>({
+      method: 'POST',
+      url: '/api/app/ders/ogrenci-repo-guncelle',
     },
     { apiName: this.apiName,...config });
   
