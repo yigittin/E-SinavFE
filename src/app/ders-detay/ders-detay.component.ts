@@ -42,19 +42,19 @@ export class DersDetayComponent implements OnInit{
 
   async ngOnInit(){
     this.id=this.route.snapshot.params['id'];
-    await this.dersService.getDersSingleByIdById(this.id).subscribe((res)=>{
+    await this.dersService.getDersSingleByIdById(this.id).subscribe(async (res)=>{
       this.dersDetay=res;
-      this.bilgileriGetir();
-    });
-    
-
+        await this.dersService.getDersOgrenciListByDersId(this.dersDetay.id).subscribe((res)=>{
+          this.ogrenciList=res;
+        })
+    });    
   }
 
-  bilgileriGetir(){
-    this.dersService.getDersSiniflarByDersId(this.dersDetay.id).subscribe((res)=>{
-      this.sinifList=res;
-    })
-    this.dersService.getOgrenciListByDersId(this.dersDetay.id).subscribe((res)=>{
+  async  bilgileriGetir(){
+    // await this.dersService.getDersSiniflarByDersId(this.dersDetay.id).subscribe((res)=>{
+    //   this.sinifList=res;
+    // })
+    await this.dersService.getOgrenciListByDersId(this.dersDetay.id).subscribe((res)=>{
       this.ogrenciList=res;
     })
   }
