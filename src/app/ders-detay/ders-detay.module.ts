@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { DersDetayRoutingModule } from './ders-detay-routing.module';
 import { DersDetayComponent } from './ders-detay.component';
+import { SharedModule } from '../shared/shared.module';
+import { ModalComponent } from '@abp/ng.theme.shared';
+import { DersModule } from '../ders/ders.module';
 
 
 @NgModule({
@@ -11,7 +14,7 @@ import { DersDetayComponent } from './ders-detay.component';
   ],
   imports: [
     CommonModule,
-    DersDetayRoutingModule
+    DersDetayRoutingModule,
   ]
 })
 export class DersDetayModule { }

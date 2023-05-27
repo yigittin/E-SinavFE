@@ -1,7 +1,7 @@
 import { ListService } from '@abp/ng.core';
-import { Confirmation, ConfirmationService } from '@abp/ng.theme.shared';
+import { Confirmation, ConfirmationService, ModalComponent } from '@abp/ng.theme.shared';
 import { query } from '@angular/animations';
-import { Component, Injectable, Injector, OnInit } from '@angular/core';
+import { Component, Injectable, Injector, NgModule, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { BolumService } from '@proxy/bolumler';
@@ -57,5 +57,12 @@ export class DersDetayComponent implements OnInit{
     await this.dersService.getOgrenciListByDersId(this.dersDetay.id).subscribe((res)=>{
       this.ogrenciList=res;
     })
+  }
+
+  saveOgrenci(){
+
+  }
+  addOgrenci(){
+    this.isOgrenciModalOpen=true;
   }
 }
