@@ -40,10 +40,7 @@ export class DersDetayComponent implements OnInit{
 
   async ngOnInit(){
     this.id=this.route.snapshot.params['id'];
-    await this.dersService.getDersSingleByIdById(this.id).subscribe(async (res)=>{
-      this.dersDetay=res;
-
-    });    
+    await this.bilgileriGetir();
   }
   async open(content) {
     await this.dersService.getOgrenciListByDersId(this.dersDetay.id).subscribe((res)=>{
@@ -54,29 +51,27 @@ export class DersDetayComponent implements OnInit{
   contentGet(content){
 		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then();
   }
-  private getDismissReason(reason: any): string {
-		if (reason === ModalDismissReasons.ESC) {
-			return 'by pressing ESC';
-		} else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-			return 'by clicking on a backdrop';
-		} else {
-			return `with: ${reason}`;
-		}
-	}
+  
   async  bilgileriGetir(){
     // await this.dersService.getDersSiniflarByDersId(this.dersDetay.id).subscribe((res)=>{
     //   this.sinifList=res;
     // })
-    await this.dersService.getOgrenciListByDersId(this.dersDetay.id).subscribe((res)=>{
+    await this.dersService.getDersSingleByIdById(this.id).subscribe(async (res)=>{
+      this.dersDetay=res;
+    });    
+    await this.dersService.getDersOgrenciListByDersId(this.id).subscribe(async (res)=>{
       this.ogrenciList=res;
-    })
+    });
   }
 
   saveOgrenci(){
 
   }
-  addOgrenci(){
-    this.isOgrenciModalOpen=true;
+
+  async addOgrenci(){
+    let idList=Array.from(this.selectedRowIds);
+    this.dersService.ogrenciEkleMultiByListAndGuidSinif(idList,this.dersDetay.id).subscribe();
+    await this.bilgileriGetir();
   }
   selectedId: string;
 

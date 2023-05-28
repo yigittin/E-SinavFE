@@ -44,10 +44,27 @@ export class SinifService {
     { apiName: this.apiName,...config });
   
 
+  getPagedSiniflarByInputAndFilter = (input: PagedAndSortedResultRequestDto, filter?: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, PagedResultDto<SinifInfoDto>>({
+      method: 'GET',
+      url: '/api/app/sinif/paged-siniflar',
+      params: { sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount, filter },
+    },
+    { apiName: this.apiName,...config });
+  
+
   getSinifInfo = (config?: Partial<Rest.Config>) =>
     this.restService.request<any, SinifInfoDto[]>({
       method: 'GET',
       url: '/api/app/sinif/sinif-info',
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getSinifSingleById = (id: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, SinifInfoDto>({
+      method: 'GET',
+      url: `/api/app/sinif/${id}/sinif-single`,
     },
     { apiName: this.apiName,...config });
   

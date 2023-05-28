@@ -1,7 +1,7 @@
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
-import type { CreateUpdateDersDto, DersDto, DersInfoDto, UpdateDersDto } from '../ders-dtos/models';
+import type { CreateUpdateDersDto, DersDropDownDto, DersDto, DersInfoDto, UpdateDersDto } from '../ders-dtos/models';
 import type { OgrenciSelectionDto } from '../ogrenci-dtos/models';
 import type { SinifInfoDto } from '../sinif-dtos/models';
 
@@ -56,7 +56,7 @@ export class DersService {
   
 
   getDersDropdown = (config?: Partial<Rest.Config>) =>
-    this.restService.request<any, DersInfoDto[]>({
+    this.restService.request<any, DersDropDownDto[]>({
       method: 'GET',
       url: '/api/app/ders/ders-dropdown',
     },

@@ -3,21 +3,21 @@
         <div class="row">
             <div class="col col-md-6">
                 <h5 class="card-title">
-                    {{ "::Lecture" | abpLocalization }}
+                    {{ "::Class" | abpLocalization }}
                 </h5>
             </div>
             <div class="text-end col col-md-6">
                 <div class="text-lg-end pt-2">
-                  <button id="create" class="btn btn-primary" type="button" (click)="createDers()">
+                  <button id="create" class="btn btn-primary" type="button" (click)="createSinif()">
                     <i class="fa fa-plus me-1"></i>
-                    <span>{{ "::NewLecture" | abpLocalization }}</span>
+                    <span>{{ "::NewClass" | abpLocalization }}</span>
                   </button>
             </div>
             </div>
         </div>
     </div>
     <div class="card-body">
-        <ngx-datatable [rows]="ders.items" [count]="ders.totalCount" [list]="list" default>
+        <ngx-datatable [rows]="sinif.items" [count]="sinif.totalCount" [list]="list" default>
             <ngx-datatable-column
             [name]="'::Actions' | abpLocalization"
             [maxWidth]="150"
@@ -34,13 +34,13 @@
                   <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
                 </button>
                 <div ngbDropdownMenu>
-                  <button *abpPermission="'SanalVaka.Dersler.Edit'" ngbDropdownItem (click)="editDers(row.id)">
+                  <button *abpPermission="'SanalVaka.Sinif.Edit'" ngbDropdownItem (click)="editSinif(row.id)">
                     {{ '::Edit' | abpLocalization }}
                   </button>
-                  <button *abpPermission="'SanalVaka.Dersler.Edit'" ngbDropdownItem (click)="onaylama(row.id)">
+                  <button *abpPermission="'SanalVaka.Sinif.Edit'" ngbDropdownItem (click)="onaylama(row.id)">
                     {{ 'Onayla' | abpLocalization }}
                   </button>
-                  <button *abpPermission="'SanalVaka.Dersler.Delete'" ngbDropdownItem (click)="delete(row.id)">
+                  <button *abpPermission="'SanalVaka.Sinif.Delete'" ngbDropdownItem (click)="delete(row.id)">
                     {{ '::Delete' | abpLocalization }}
                   </button>
                   <!-- [routerLink]="['developer-duzenle/'+developer.developerId] -->
@@ -49,18 +49,18 @@
               </div>
             </ng-template>
           </ngx-datatable-column>
+            <ngx-datatable-column [name]="'::ClassName' | abpLocalization" prop="sinifAdi"></ngx-datatable-column>
             <ngx-datatable-column [name]="'::LectureName' | abpLocalization" prop="dersAdi"></ngx-datatable-column>
-            <ngx-datatable-column [name]="'::Proffesion' | abpLocalization" prop="bolumName"></ngx-datatable-column>
             <ngx-datatable-column [name]="'::CreatorName' | abpLocalization" prop="creatorUserName"></ngx-datatable-column>
             <ngx-datatable-column [name]="'::CreatorName' | abpLocalization" prop="dersOnayciAdi"></ngx-datatable-column>
             <ngx-datatable-column [name]="'::isConfirmed' | abpLocalization" prop="isOnaylandi"></ngx-datatable-column>
             <ngx-datatable-column [name]="'::Detail' | abpLocalization">
-              <ng-template let-row="row" ngx-datatable-cell-template>
+              <!-- <ng-template let-row="row" ngx-datatable-cell-template>
                 <a [routerLink]="'../ders-detay/'+(row.id)" type="button" class="btn btn-sm bg-primary">
                   <i class="fas fa-pencil-alt"></i>
                   {{ "Detay"}}
                 </a>
-              </ng-template>
+              </ng-template> -->
             </ngx-datatable-column>
             <!-- id?: string;
             bolumAdi?: string;

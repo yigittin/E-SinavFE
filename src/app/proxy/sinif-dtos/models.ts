@@ -23,6 +23,7 @@ export interface SinifDto extends AuditedEntityDto<string> {
 }
 
 export interface SinifInfoDto {
+  id?: string;
   sinifAdi?: string;
   sinifLimit: number;
   dersId?: string;

@@ -17,16 +17,23 @@ function configureRoutes(routesService: RoutesService) {
       },
       {
         path: '/bolumler',
-        name: 'Bolumler',
+        name: '::Proffesion',
         iconClass: 'fas fa-home',
         order: 2,
         layout: eLayoutType.application,
       },
       {
         path: '/dersler',
-        name: 'Dersler',
+        name: '::Lecture',
         iconClass: 'fas fa-home',
         order: 3,
+        layout: eLayoutType.application,
+      },
+      {
+        path: '/siniflar',
+        name: '::Class',
+        iconClass: 'fas fa-home',
+        order: 4,
         layout: eLayoutType.application,
       }
     ]);

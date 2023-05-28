@@ -20,6 +20,11 @@ export interface CreateUpdateDersDto {
   bolumId: string;
 }
 
+export interface DersDropDownDto {
+  id?: string;
+  dersAdi?: string;
+}
+
 export interface DersDto extends AuditedEntityDto<string> {
   dersAdi?: string;
   bolumId?: string;
