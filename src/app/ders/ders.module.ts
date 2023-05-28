@@ -8,7 +8,6 @@ import { DersDetayComponent } from '../ders-detay/ders-detay.component';
 import { DersDetayRoutingModule } from '../ders-detay/ders-detay-routing.module';
 import { DersDetayModule } from '../ders-detay/ders-detay.module';
 
-
 @NgModule({
   declarations: [
     DersComponent,
