@@ -79,19 +79,23 @@
 
 <abp-modal [(visible)]="isModalOpen">
     <ng-template #abpHeader>
-        <h3>{{ (selectedDers.id ? '::Edit' : 'Yeni Ders') | abpLocalization }}</h3>
+        <h3>{{ (selectedSinif.id ? '::Edit' : '::NewClass') | abpLocalization }}</h3>
     </ng-template>
     <ng-template #abpBody>
         <form [formGroup]="form" (ngSubmit)="save()">
           <div class="form-group">
-            <label for="ders-dersAdi">Ders Adı</label><span> * </span>
-            <input type="text" id="ders-dersAdi" class="form-control" formControlName="dersAdi" autofocus />
+            <label for="sinif-sinifAdi">{{'::ClassName' | abpLocalization}}</label><span> * </span>
+            <input type="text" id="sinif-sinifAdi" class="form-control" formControlName="sinifAdi" autofocus />
+          </div>
+          <div class="form-group">
+            <label for="sinif-sinifLimit">{{'::ClassLimit' | abpLocalization}}</label><span> * </span>
+            <input type="number" id="sinif-sinifLimit" class="form-control" formControlName="sinifLimit"/>
           </div>
           <div class="mt-2">
-            <label for="ders-bolumId">Bölüm</label><span> * </span>
-            <select class="form-control" id="ders-bolumId" formControlName="bolumId">
-              <option [ngValue]="null">Bölüm seçiniz</option>
-              <option [ngValue]="bolum.id" *ngFor="let bolum of bolumList"> {{ bolum.bolumAdi | abpLocalization }}</option>
+            <label for="sinif-dersId">{{'::Lecture' | abpLocalization}} </label><span> * </span>
+            <select class="form-control" id="sinif-dersId" formControlName="dersId">
+              <option [ngValue]="null">Ders Seçiniz</option>
+              <option [ngValue]="ders.id" *ngFor="let ders of dersList"> {{ ders.dersAdi | abpLocalization }}</option>
             </select>
           </div>
         </form>

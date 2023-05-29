@@ -3,12 +3,14 @@ import type { SinifYetkiliDto } from '../yetkili-dtos/models';
 import type { AuditedEntityDto } from '@abp/ng.core';
 
 export interface CreateUpdateSinifDto {
+  id?: string;
   sinifAdi: string;
   sinifLimit: number;
   dersId: string;
-  dersAdi: string;
+  dersAdi?: string;
   ogrenciList: OgrenciDto[];
   yetkiliList: SinifYetkiliDto[];
+  isOnaylandi: boolean;
 }
 
 export interface SinifDto extends AuditedEntityDto<string> {

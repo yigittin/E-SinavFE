@@ -73,12 +73,30 @@ export class SiniflarComponent implements OnInit {
   }
   buildForm(){
     this.form=this.fb.group({
+      id:[this.selectedSinif.id||null],
       sinifAdi:[this.selectedSinif.sinifAdi||'',Validators.required],
+      sinifLimit:[this.selectedSinif.sinifLimit||'',Validators.required],
       isOnaylandi:[this.selectedSinif.isOnaylandi||false],
       dersId:[this.selectedSinif.dersId||'',Validators.required],
-      yetkiliId:[],
-      id:[this.selectedSinif.id||null]
-    })
+      yetkiliId:[]
+    });
   }
-
+  save(){
+    if(this.form.invalid){
+      return;
+    }    
+    if(this.selectedSinif.id){
+      this.sinifService.updateSinifCustomByInput(this.form.value).subscribe(()=>{
+        this.isModalOpen=false;
+        this.form.reset();
+        this.list.get();
+      })
+    }else{
+      this.sinifService.createSinifByInput(this.form.value).subscribe(()=>{
+        this.isModalOpen=false;
+        this.form.reset();
+        this.list.get();
+      })
+    }
+  }
 }

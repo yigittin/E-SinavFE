@@ -19,6 +19,15 @@ export class SinifService {
     { apiName: this.apiName,...config });
   
 
+  createSinifByInput = (input: CreateUpdateSinifDto, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, void>({
+      method: 'POST',
+      url: '/api/app/sinif/sinif',
+      body: input,
+    },
+    { apiName: this.apiName,...config });
+  
+
   delete = (id: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, void>({
       method: 'DELETE',
@@ -101,6 +110,15 @@ export class SinifService {
     this.restService.request<any, SinifDto>({
       method: 'PUT',
       url: `/api/app/sinif/${id}`,
+      body: input,
+    },
+    { apiName: this.apiName,...config });
+  
+
+  updateSinifCustomByInput = (input: CreateUpdateSinifDto, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, void>({
+      method: 'PUT',
+      url: '/api/app/sinif/sinif-custom',
       body: input,
     },
     { apiName: this.apiName,...config });
