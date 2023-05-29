@@ -53,15 +53,15 @@ export class DersDetayComponent implements OnInit{
   }
   
   async  bilgileriGetir(){
-    // await this.dersService.getDersSiniflarByDersId(this.dersDetay.id).subscribe((res)=>{
-    //   this.sinifList=res;
-    // })
     await this.dersService.getDersSingleByIdById(this.id).subscribe(async (res)=>{
       this.dersDetay=res;
+      await this.dersService.getDersSiniflarByDersId(this.dersDetay.id).subscribe((res)=>{
+        this.sinifList=res;
+      })
+      await this.dersService.getDersOgrenciListByDersId(this.id).subscribe(async (res)=>{
+        this.ogrenciList=res;
+      });
     });    
-    await this.dersService.getDersOgrenciListByDersId(this.id).subscribe(async (res)=>{
-      this.ogrenciList=res;
-    });
   }
 
   saveOgrenci(){
@@ -72,6 +72,7 @@ export class DersDetayComponent implements OnInit{
     let idList=Array.from(this.selectedRowIds);
     this.dersService.ogrenciEkleMultiByListAndGuidSinif(idList,this.dersDetay.id).subscribe();
     await this.bilgileriGetir();
+    this.selectedRowIds.clear();
   }
   selectedId: string;
 
