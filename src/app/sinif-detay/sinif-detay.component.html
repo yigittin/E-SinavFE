@@ -1,16 +1,21 @@
 <div class="card">
     <div class="card-header">
-        {{dersDetay.dersAdi}}
+        {{sinifDetay.sinifAdi}}
     </div>
     <div class="card-body">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="label">
+                        Sinif Adı :
+                    </label>
+                    <input type="text" id="sinifDetay-sinifAdi" class="form-control" formControlName="sinifAdi" disabled value="{{sinifDetay.sinifAdi}}" />
+                    <label class="label">
                         Ders Adı :
                     </label>
-                    <input type="text" id="dersDetay-dersAdi" class="form-control" formControlName="dersAdi" disabled value="{{dersDetay.dersAdi}}" />
+                    <input type="text" id="sinifDetay-dersAdi" class="form-control" formControlName="dersAdi" disabled value="{{sinifDetay.dersAdi}}" />
                 </div>
+                
             </div>
         </div>
     </div>
@@ -29,8 +34,7 @@
                             </button>
                         </div>
                     </div>
-                </div>
-                
+                </div>                
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -50,8 +54,7 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
-              
+                </div>              
             </div>
         </div>
     </div>

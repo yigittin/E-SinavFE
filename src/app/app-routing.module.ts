@@ -31,6 +31,7 @@ const routes: Routes = [
   { path: 'ogrenciler', loadChildren: () => import('./ogrenci/ogrenci.module').then(m => m.OgrenciModule) },
   { path: 'ders-detay/:id', loadChildren: () => import('./ders-detay/ders-detay.module').then(m => m.DersDetayModule)},
   { path: 'siniflar', loadChildren: () => import('./siniflar/siniflar.module').then(m => m.SiniflarModule) },
+  { path: 'sinif-detaylar/:id', loadChildren: () => import('./sinif-detay/sinif-detay.module').then(m => m.SinifDetayModule) },
 ];
 
 @NgModule({

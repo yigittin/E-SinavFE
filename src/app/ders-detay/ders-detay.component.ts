@@ -57,7 +57,7 @@ export class DersDetayComponent implements OnInit{
       this.dersDetay=res;
       await this.dersService.getDersSiniflarByDersId(this.dersDetay.id).subscribe((res)=>{
         this.sinifList=res;
-      })
+      });
       await this.dersService.getDersOgrenciListByDersId(this.id).subscribe(async (res)=>{
         this.ogrenciList=res;
       });
