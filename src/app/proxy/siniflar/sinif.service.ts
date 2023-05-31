@@ -1,6 +1,7 @@
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
+import type { OgrenciSelectionDto } from '../ogrenci-dtos/models';
 import type { CreateUpdateSinifDto, SinifDto, SinifInfoDto } from '../sinif-dtos/models';
 
 @Injectable({
@@ -53,6 +54,15 @@ export class SinifService {
     { apiName: this.apiName,...config });
   
 
+  getOgrenciListBySinifIdAndDersId = (sinifId: string, dersId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, OgrenciSelectionDto[]>({
+      method: 'GET',
+      url: '/api/app/sinif/ogrenci-list',
+      params: { sinifId, dersId },
+    },
+    { apiName: this.apiName,...config });
+  
+
   getPagedSiniflarByInputAndFilter = (input: PagedAndSortedResultRequestDto, filter?: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, PagedResultDto<SinifInfoDto>>({
       method: 'GET',
@@ -78,20 +88,48 @@ export class SinifService {
     { apiName: this.apiName,...config });
   
 
-  ogrenciEkleMultiByListAndGuidSinif = (list: number[], guidSinif: string, config?: Partial<Rest.Config>) =>
+  sinifOgrenciCikarMultiByGuidSinifAndList = (guidSinif: string, list: string[], config?: Partial<Rest.Config>) =>
     this.restService.request<any, void>({
       method: 'POST',
-      url: '/api/app/sinif/ogrenci-ekle-multi',
+      url: '/api/app/sinif/sinif-ogrenci-cikar-multi',
       params: { guidSinif },
       body: list,
     },
     { apiName: this.apiName,...config });
   
 
-  ogrenciEkleSingleByGuidSinifAndOgrenciId = (guidSinif: string, ogrenciId: number, config?: Partial<Rest.Config>) =>
+  sinifOgrenciCikarSingleByGuidSinifAndOgrenciId = (guidSinif: string, ogrenciId: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, void>({
       method: 'POST',
-      url: `/api/app/sinif/ogrenci-ekle-single/${ogrenciId}`,
+      url: `/api/app/sinif/sinif-ogrenci-cikar-single/${ogrenciId}`,
+      params: { guidSinif },
+    },
+    { apiName: this.apiName,...config });
+  
+
+  sinifOgrenciEkleMultiByListAndGuidSinif = (list: string[], guidSinif: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, void>({
+      method: 'POST',
+      url: '/api/app/sinif/sinif-ogrenci-ekle-multi',
+      params: { guidSinif },
+      body: list,
+    },
+    { apiName: this.apiName,...config });
+  
+
+  sinifOgrenciEkleSingleByGuidSinifAndOgrenciId = (guidSinif: string, ogrenciId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, void>({
+      method: 'POST',
+      url: `/api/app/sinif/sinif-ogrenci-ekle-single/${ogrenciId}`,
+      params: { guidSinif },
+    },
+    { apiName: this.apiName,...config });
+  
+
+  sinifOgrenciListByGuidSinif = (guidSinif: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, OgrenciSelectionDto[]>({
+      method: 'POST',
+      url: '/api/app/sinif/sinif-ogrenci-list',
       params: { guidSinif },
     },
     { apiName: this.apiName,...config });

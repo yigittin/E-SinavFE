@@ -11,7 +11,7 @@ import { SharedModule } from '../shared/shared.module';
     SinifDetayComponent
   ],
   imports: [
-    SharedModule,
+    CommonModule,
     SinifDetayRoutingModule
   ]
 })

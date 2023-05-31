@@ -70,7 +70,7 @@ export class DersDetayComponent implements OnInit{
 
   async addOgrenci(){
     let idList=Array.from(this.selectedRowIds);
-    this.dersService.ogrenciEkleMultiByListAndGuidSinif(idList,this.dersDetay.id).subscribe();
+    this.dersService.ogrenciEkleMultiByListAndGuidDers(idList,this.dersDetay.id).subscribe();
     await this.bilgileriGetir();
     this.selectedRowIds.clear();
   }
@@ -83,8 +83,6 @@ export class DersDetayComponent implements OnInit{
     else {
       this.selectedRowIds.add(id);
     }
-
-    console.log(this.selectedRowIds);
   }
 
   rowIsSelected(id: string) {

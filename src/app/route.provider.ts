@@ -17,7 +17,7 @@ function configureRoutes(routesService: RoutesService) {
       },
       {
         path: '/bolumler',
-        name: '::Proffesion',
+        name: '::Study',
         iconClass: 'fas fa-home',
         order: 2,
         layout: eLayoutType.application,

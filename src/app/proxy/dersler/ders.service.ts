@@ -122,21 +122,21 @@ export class DersService {
     { apiName: this.apiName,...config });
   
 
-  ogrenciEkleMultiByListAndGuidSinif = (list: string[], guidSinif: string, config?: Partial<Rest.Config>) =>
+  ogrenciEkleMultiByListAndGuidDers = (list: string[], guidDers: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, void>({
       method: 'POST',
       url: '/api/app/ders/ogrenci-ekle-multi',
-      params: { guidSinif },
+      params: { guidDers },
       body: list,
     },
     { apiName: this.apiName,...config });
   
 
-  ogrenciEkleSingleByGuidSinifAndOgrenciId = (guidSinif: string, ogrenciId: string, config?: Partial<Rest.Config>) =>
+  ogrenciEkleSingleByGuidDersAndOgrenciId = (guidDers: string, ogrenciId: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, void>({
       method: 'POST',
       url: `/api/app/ders/ogrenci-ekle-single/${ogrenciId}`,
-      params: { guidSinif },
+      params: { guidDers },
     },
     { apiName: this.apiName,...config });
   
