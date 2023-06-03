@@ -3,21 +3,21 @@
         <div class="row">
             <div class="col col-md-6">
                 <h5 class="card-title">
-                    {{ "::Lecture" | abpLocalization }}
+                    {{ "::Exam" | abpLocalization }}
                 </h5>
             </div>
             <div class="text-end col col-md-6">
                 <div class="text-lg-end pt-2">
-                  <button id="create" class="btn btn-primary" type="button" (click)="createDers()">
+                  <button id="create" class="btn btn-primary" type="button" (click)="createSinav()">
                     <i class="fa fa-plus me-1"></i>
-                    <span>{{ "::NewLecture" | abpLocalization }}</span>
+                    <span>{{ "::NewExam" | abpLocalization }}</span>
                   </button>
             </div>
             </div>
         </div>
     </div>
     <div class="card-body">
-        <ngx-datatable [rows]="ders.items" [count]="ders.totalCount" [list]="list" default>
+        <ngx-datatable [rows]="sinav.items" [count]="sinav.totalCount" [list]="list" default>
             <ngx-datatable-column
             [name]="'::Actions' | abpLocalization"
             [maxWidth]="150"
@@ -34,7 +34,7 @@
                   <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
                 </button>
                 <div ngbDropdownMenu>
-                  <button *abpPermission="'SanalVaka.Dersler.Edit'" ngbDropdownItem (click)="editDers(row.id)">
+                  <!-- <button *abpPermission="'SanalVaka.Dersler.Edit'" ngbDropdownItem (click)="editDers(row.id)">
                     {{ '::Edit' | abpLocalization }}
                   </button>
                   <button *abpPermission="'SanalVaka.Dersler.Edit'" ngbDropdownItem (click)="onaylama(row.id)">
@@ -42,7 +42,7 @@
                   </button>
                   <button *abpPermission="'SanalVaka.Dersler.Delete'" ngbDropdownItem (click)="delete(row.id)">
                     {{ '::Delete' | abpLocalization }}
-                  </button>
+                  </button> -->
                   <!-- [routerLink]="['developer-duzenle/'+developer.developerId] -->
 
                 </div>
@@ -50,17 +50,17 @@
               
             </ng-template>
           </ngx-datatable-column>
+            <ngx-datatable-column [name]="'::ExamName' | abpLocalization" prop="sinavAdi"></ngx-datatable-column>
             <ngx-datatable-column [name]="'::LectureName' | abpLocalization" prop="dersAdi"></ngx-datatable-column>
-            <ngx-datatable-column [name]="'::Study' | abpLocalization" prop="bolumName"></ngx-datatable-column>
-            <ngx-datatable-column [name]="'::CreatorName' | abpLocalization" prop="creatorUserName"></ngx-datatable-column>
-            <ngx-datatable-column [name]="'::CreatorName' | abpLocalization" prop="dersOnayciAdi"></ngx-datatable-column>
-            <ngx-datatable-column [name]="'::isConfirmed' | abpLocalization" prop="isOnaylandi"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::ExamStart' | abpLocalization" prop="baslangicTarih"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::ExamTime' | abpLocalization" prop="sinavSure"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::ExamPoint' | abpLocalization" prop="agirlik"></ngx-datatable-column>
             <ngx-datatable-column [name]="'::Detail' | abpLocalization">
-              <ng-template let-row="row" ngx-datatable-cell-template>
-                <a [routerLink]="'../ders-detay/'+(row.id)" type="button" class="btn btn-sm bg-primary">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <!-- <a [routerLink]="'../ders-detay/'+(row.id)" type="button" class="btn btn-sm bg-primary">
                   <i class="fas fa-pencil-alt"></i>
                   {{ '::Detail' | abpLocalization}}
-                </a>
+                </a> -->
               </ng-template>
             </ngx-datatable-column>
             <!-- id?: string;
@@ -80,19 +80,34 @@
 
 <abp-modal [(visible)]="isModalOpen">
     <ng-template #abpHeader>
-        <h3>{{ (selectedDers.id ? '::Edit' : '::NewLecture') | abpLocalization }}</h3>
+        <h3>{{ (selectedSinav.id ? '::Edit' : '::NewExam') | abpLocalization }}</h3>
     </ng-template>
     <ng-template #abpBody>
         <form [formGroup]="form" (ngSubmit)="save()">
           <div class="form-group">
-            <label for="ders-dersAdi">Ders Adı</label><span> * </span>
-            <input type="text" id="ders-dersAdi" class="form-control" formControlName="dersAdi" autofocus />
-          </div>
+            <label for="sinav-sinavAdi">Sınav Adı</label><span> * </span>
+            <input type="text" id="sinav-sinavAdi" class="form-control" formControlName="sinavAdi" autofocus />
+            <label for="sinav-sinavSure">Sınav Süresi</label><span> * </span>
+            <input type="number" id="sinav-sinavSure" class="form-control" formControlName="sinavSure" autofocus />
+            <label for="sinav-sinavAgirlik">Sınav Ağırlık</label><span> * </span>
+            <input type="number" id="sinav-sinavAgirlik" class="form-control" formControlName="agirlik" autofocus />
+
+            <label for="sinav-baslangicTarih">Başlangıç Tarihi</label><span> * </span>
+            <input
+            type="datetime"
+            #datepicker="ngbDatepicker"
+            class="form-control"
+            name="datepicker"
+            formControlName="baslangicTarih"
+            ngbDatepicker
+            (click)="datepicker.toggle()"
+            />            
+        </div>
           <div class="mt-2">
-            <label for="ders-bolumId">Bölüm</label><span> * </span>
-            <select class="form-control" id="ders-bolumId" formControlName="bolumId">
-              <option [ngValue]="null">Bölüm seçiniz</option>
-              <option [ngValue]="bolum.id" *ngFor="let bolum of bolumList"> {{ bolum.bolumAdi | abpLocalization }}</option>
+            <label for="sinav-dersId">{{'::Lecture' | abpLocalization}}</label><span> * </span>
+            <select class="form-control" id="sinav-dersId" formControlName="dersId">
+              <option [ngValue]="null">Ders seçiniz</option>
+              <option [ngValue]="ders.id" *ngFor="let ders of dersList"> {{ ders.dersAdi | abpLocalization }}</option>
             </select>
           </div>
         </form>

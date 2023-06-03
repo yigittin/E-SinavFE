@@ -144,6 +144,33 @@ export class SinifService {
     { apiName: this.apiName,...config });
   
 
+  sinifYetkiliCikarSingleBySinifIdAndYetkiliId = (sinifId: string, yetkiliId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, void>({
+      method: 'POST',
+      url: '/api/app/sinif/sinif-yetkili-cikar-single',
+      params: { sinifId, yetkiliId },
+    },
+    { apiName: this.apiName,...config });
+  
+
+  sinifYetkiliEkleMultiBySinifIdAndList = (sinifId: string, list: string[], config?: Partial<Rest.Config>) =>
+    this.restService.request<any, void>({
+      method: 'POST',
+      url: `/api/app/sinif/sinif-yetkili-ekle-multi/${sinifId}`,
+      body: list,
+    },
+    { apiName: this.apiName,...config });
+  
+
+  sinifYetkiliEkleSingleBySinifIdAndYetkiliId = (sinifId: string, yetkiliId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, void>({
+      method: 'POST',
+      url: '/api/app/sinif/sinif-yetkili-ekle-single',
+      params: { sinifId, yetkiliId },
+    },
+    { apiName: this.apiName,...config });
+  
+
   update = (id: string, input: CreateUpdateSinifDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, SinifDto>({
       method: 'PUT',

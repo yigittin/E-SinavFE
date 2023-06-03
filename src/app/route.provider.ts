@@ -35,6 +35,13 @@ function configureRoutes(routesService: RoutesService) {
         iconClass: 'fas fa-home',
         order: 4,
         layout: eLayoutType.application,
+      },
+      {
+        path: '/sinavlar',
+        name: '::Exam',
+        iconClass: 'fas fa-home',
+        order: 5,
+        layout: eLayoutType.application,
       }
     ]);
   };
