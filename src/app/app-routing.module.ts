@@ -33,6 +33,7 @@ const routes: Routes = [
   { path: 'siniflar', loadChildren: () => import('./siniflar/siniflar.module').then(m => m.SiniflarModule) },
   { path: 'sinif-detaylar/:id', loadChildren: () => import('./sinif-detay/sinif-detay.module').then(m => m.SinifDetayModule) },
   { path: 'sinavlar', loadChildren: () => import('./sinav/sinav.module').then(m => m.SinavModule) },
+  { path: 'sinav-detaylar/:id', loadChildren: () => import('./sinav-detay/sinav-detay.module').then(m => m.SinavDetayModule) },
 ];
 
 @NgModule({

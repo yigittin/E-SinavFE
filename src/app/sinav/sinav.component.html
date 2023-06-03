@@ -34,10 +34,10 @@
                   <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
                 </button>
                 <div ngbDropdownMenu>
-                  <!-- <button *abpPermission="'SanalVaka.Dersler.Edit'" ngbDropdownItem (click)="editDers(row.id)">
+                   <button ngbDropdownItem (click)="editSinav(row.id)">
                     {{ '::Edit' | abpLocalization }}
                   </button>
-                  <button *abpPermission="'SanalVaka.Dersler.Edit'" ngbDropdownItem (click)="onaylama(row.id)">
+                  <!--<button *abpPermission="'SanalVaka.Dersler.Edit'" ngbDropdownItem (click)="onaylama(row.id)">
                     {{ 'Onayla' | abpLocalization }}
                   </button>
                   <button *abpPermission="'SanalVaka.Dersler.Delete'" ngbDropdownItem (click)="delete(row.id)">
@@ -57,10 +57,10 @@
             <ngx-datatable-column [name]="'::ExamPoint' | abpLocalization" prop="agirlik"></ngx-datatable-column>
             <ngx-datatable-column [name]="'::Detail' | abpLocalization">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                <!-- <a [routerLink]="'../ders-detay/'+(row.id)" type="button" class="btn btn-sm bg-primary">
+                <a [routerLink]="'../sinav-detaylar/'+(row.id)" type="button" class="btn btn-sm bg-primary">
                   <i class="fas fa-pencil-alt"></i>
                   {{ '::Detail' | abpLocalization}}
-                </a> -->
+                </a>
               </ng-template>
             </ngx-datatable-column>
             <!-- id?: string;

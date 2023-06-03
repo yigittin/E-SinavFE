@@ -65,7 +65,6 @@ export class SinavComponent implements OnInit {
       dersId:[this.selectedSinav.dersId||'',Validators.required],
       agirlik:[this.selectedSinav.agirlik||null,Validators.required],
       id:[this.selectedSinav.id||null]
-
     })
   }
 

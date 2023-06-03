@@ -49,6 +49,9 @@ export interface SinavDto {
   dersAdi?: string;
 }
 
+export interface SoruCrudDto extends AuditedEntityDto<string> {
+}
+
 export interface SoruDto {
   id?: string;
   soruMetni?: string;
