@@ -1,4 +1,7 @@
-import type { AuditedEntityDto } from '@abp/ng.core';
+import type { AuditedEntityDto, FullAuditedEntityDto } from '@abp/ng.core';
+
+export interface CevapCrudDto extends FullAuditedEntityDto<string> {
+}
 
 export interface CevapDto {
   id?: string;
@@ -57,4 +60,5 @@ export interface SoruDto {
   soruMetni?: string;
   sinavId?: string;
   cevapList: CevapDto[];
+  puan: number;
 }

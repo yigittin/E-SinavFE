@@ -1,9 +1,9 @@
 import { ConfirmationService } from '@abp/ng.theme.shared';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DersService } from '@proxy/dersler';
-import { CevapDto, CreateUpdateCevapDto, SinavDto, SoruDto } from '@proxy/sinav-dtos';
+import { CevapDto, CreateUpdateCevapDto, CreateUpdateSoruDto, SinavDto, SoruDto } from '@proxy/sinav-dtos';
 import { CevapService, SinavService, SoruService } from '@proxy/sinavlar';
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -19,6 +19,7 @@ export class SinavDetayComponent implements OnInit{
   form:FormGroup;
   isSoruModalOpen=false;
   soruList:SoruDto[];
+  soru:CreateUpdateSoruDto;
   newCevap:CreateUpdateCevapDto;
   cevapList:CevapDto[];
   selectedSoru={} as SoruDto;
@@ -47,10 +48,30 @@ export class SinavDetayComponent implements OnInit{
     })
   }
 
+  buildForm(){
+    this.soru={} as CreateUpdateSoruDto;
+    this.form=this.fb.group({
+      soruMetni:[this.soru.soruMetni||''],
+      puan:[this.soru.puan||''],
+      sinavId:[this.id]
+    })
+  }
   async open(content) {
     this.contentGet(content);
 	}
   contentGet(content){
-		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then();
+    this.buildForm();
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then();
+  }
+
+  async save(form:NgForm){
+    console.log(this.form.value);
+    if(this.form.invalid){
+      return;
+    }
+    await this.soruService.createUpdateSoruByInput(this.form.value).subscribe(()=>{
+      this.form.reset();
+      this.bilgileriGetir()
+    })
   }
 }

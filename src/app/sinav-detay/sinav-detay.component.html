@@ -57,19 +57,41 @@
     </div>
 </div>
 
-
 <ng-template #content let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Soru Ekle</h4>
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <form>
-            
+        <form #form="ngForm" [formGroup]="form" (ngSubmit)="save()">
+            <div class="form-group">
+              <label for="soruMetni">Soru Metni</label><span> * </span>
+              <input name="soruMetni" type="text" id="soruMetni" class="form-control" [(ngModal)]="this.soru.soruMetni" autofocus />
+              <label for="puan">Soru Puanı</label><span> * </span>
+              <input name="puan" type="number" id="puan" class="form-control" [(ngModal)]="this.soru.puan"/>
+            </div>
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="addOgrenci();modal.close();">Save</button>
+        <button type="submit" class="btn btn-outline-dark" (click)="save()" [disabled]="form.invalid">Save</button>
+    </div>
+</ng-template>
+
+<ng-template #content let-modalCevap>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title cevapModal">Soru Ekle</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <label for="newCevap.CevapMetni">Cevap Metni</label><span>*</span>
+            <input type="text"[(ngModal)]="newCevap.CevapMetni">
+            <label for="newCevap.IsDogru">Doğru Cevap</label>
+            <input type="checkbox"[(ngModal)]="newCevap.IsDogru">
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="addSoru();modal.close();">Save</button>
     </div>
 </ng-template>
 

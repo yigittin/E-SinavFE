@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SinavDetayRoutingModule } from './sinav-detay-routing.module';
 import { SinavDetayComponent } from './sinav-detay.component';
+import { FormsModule, NgControl, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +12,10 @@ import { SinavDetayComponent } from './sinav-detay.component';
   ],
   imports: [
     CommonModule,
-    SinavDetayRoutingModule
+    SinavDetayRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    
   ]
 })
 export class SinavDetayModule { }
