@@ -24,8 +24,8 @@
                     <div class="text-end col col-md-6">
                         <div class="text-lg-end pt-2">
                             <button id="create" class="btn btn-primary" type="button" (click)="open(content)">
-                            <i class="fa fa-plus me-1"></i>
-                            <span>Soru Ekle</span>
+                                <i class="fa fa-plus me-1"></i>
+                                <span>Soru Ekle</span>
                             </button>
                         </div>
                     </div>
@@ -39,14 +39,21 @@
                             <tr>
                                 <th>Soru Metni</th>
                                 <th>Puan</th>
+                                <th>Cevap Sayısı</th>
                                 <th style="width: 200px;">İşlemler</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let soru of soruList">                                
-                                <td>{{soru.soruMetni}}</td>
-                                <td>{{soru.Puan}}</td>
-                                <td></td>
+                            <tr *ngFor="let soruS of soruList">                                
+                                <td>{{soruS.soruMetni}}</td>
+                                <td>{{soruS.puan}}</td>
+                                <td>{{soruS.cevapCount}}</td>
+                                <td>
+                                    <button id="create" class="btn btn-primary" type="button" (click)="openCevap(contentCevap)">
+                                        <i class="fa fa-plus me-1"></i>
+                                        <span>Cevap Ekle</span>
+                                    </button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -63,35 +70,35 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <form #form="ngForm" [formGroup]="form" (ngSubmit)="save()">
+        <form [formGroup]="form" (ngSubmit)="save()">
             <div class="form-group">
               <label for="soruMetni">Soru Metni</label><span> * </span>
-              <input name="soruMetni" type="text" id="soruMetni" class="form-control" [(ngModal)]="this.soru.soruMetni" autofocus />
+              <input name="soruMetni" type="text" id="soruMetni" class="form-control" formControlName="soruMetni" autofocus />
               <label for="puan">Soru Puanı</label><span> * </span>
-              <input name="puan" type="number" id="puan" class="form-control" [(ngModal)]="this.soru.puan"/>
+              <input name="puan" type="number" id="puan" class="form-control" formControlName="puan"/>
             </div>
         </form>
     </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-outline-dark" (click)="save()" [disabled]="form.invalid">Save</button>
+        <button type="submit" class="btn btn-outline-dark" (click)="save()">Save</button>
     </div>
 </ng-template>
 
-<ng-template #content let-modalCevap>
+<ng-template #contentCevap let-modalCevap>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title cevapModal">Soru Ekle</h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modalCevap.close()"></button>
     </div>
     <div class="modal-body">
         <form>
             <label for="newCevap.CevapMetni">Cevap Metni</label><span>*</span>
-            <input type="text"[(ngModal)]="newCevap.CevapMetni">
+            <input type="text" class="form-control">
             <label for="newCevap.IsDogru">Doğru Cevap</label>
-            <input type="checkbox"[(ngModal)]="newCevap.IsDogru">
+            <input type="checkbox" class="checkbox">
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="addSoru();modal.close();">Save</button>
+        <button type="button" class="btn btn-outline-dark" (click)="addSoru();modalCevap.close();">Save</button>
     </div>
 </ng-template>
 

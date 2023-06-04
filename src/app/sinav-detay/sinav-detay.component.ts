@@ -19,7 +19,7 @@ export class SinavDetayComponent implements OnInit{
   form:FormGroup;
   isSoruModalOpen=false;
   soruList:SoruDto[];
-  soru:CreateUpdateSoruDto;
+  newSoru:CreateUpdateSoruDto;
   newCevap:CreateUpdateCevapDto;
   cevapList:CevapDto[];
   selectedSoru={} as SoruDto;
@@ -36,36 +36,41 @@ export class SinavDetayComponent implements OnInit{
 
   async ngOnInit(){
     this.id=this.route.snapshot.params['id'];
+
     await this.bilgileriGetir();
   }
 
   async bilgileriGetir(){
     await this.sinavService.getSinavSingleById(this.id).subscribe(async (res)=>{
       this.sinavDetay=res;
-      await this.soruService.getSoruListBySinavIdById(this.id).subscribe( async (res)=>{
+      this.soruService.getSoruListBySinavIdById(this.id).subscribe( async (res)=>{
         this.soruList=res;
       })
     })
   }
 
   buildForm(){
-    this.soru={} as CreateUpdateSoruDto;
     this.form=this.fb.group({
-      soruMetni:[this.soru.soruMetni||''],
-      puan:[this.soru.puan||''],
+      soruMetni:[],
+      puan:[],
       sinavId:[this.id]
     })
   }
   async open(content) {
+    this.buildForm();
     this.contentGet(content);
 	}
-  contentGet(content){
-    this.buildForm();
+  async openCevap(contentCevap){
+    this.contentCevapGet(contentCevap);
+  }
+  contentGet(content){    
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then();
   }
+  contentCevapGet(contentCevap){    
+    this.modalService.open(contentCevap, { ariaLabelledBy: 'cevapModal' }).result.then();
+  }
 
-  async save(form:NgForm){
-    console.log(this.form.value);
+  async save(){
     if(this.form.invalid){
       return;
     }
