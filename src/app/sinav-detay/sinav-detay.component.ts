@@ -17,6 +17,7 @@ export class SinavDetayComponent implements OnInit{
   id:string;
   sinavDetay:SinavDto;
   form:FormGroup;
+  formCevap:FormGroup;
   isSoruModalOpen=false;
   soruList:SoruDto[];
   newSoru:CreateUpdateSoruDto;
@@ -56,18 +57,36 @@ export class SinavDetayComponent implements OnInit{
       sinavId:[this.id]
     })
   }
+
+  buildFormCevap(id:string){
+    this.formCevap=this.fb.group({
+      cevapMetni:[],
+      isDogru:[false],
+      soruId:[id]
+    })
+  }
   async open(content) {
     this.buildForm();
     this.contentGet(content);
 	}
-  async openCevap(contentCevap){
+  async openCevap(contentCevap,id:string){        
     this.contentCevapGet(contentCevap);
+  }
+  async openCevapList(contentCevapList,id:string){
+    this.buildFormCevap(id);
+    await this.cevapService.getCevapListBySoruId(id).subscribe(async (res)=>{
+      this.cevapList=res
+      this.contentCevapListGet(contentCevapList,id);
+    })
   }
   contentGet(content){    
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then();
   }
   contentCevapGet(contentCevap){    
     this.modalService.open(contentCevap, { ariaLabelledBy: 'cevapModal' }).result.then();
+  }
+  contentCevapListGet(contentCevapList,id:string){
+    this.modalService.open(contentCevapList,{ariaLabelledBy:'cevapListModal'}).result.then();
   }
 
   async save(){
@@ -77,6 +96,19 @@ export class SinavDetayComponent implements OnInit{
     await this.soruService.createUpdateSoruByInput(this.form.value).subscribe(()=>{
       this.form.reset();
       this.bilgileriGetir()
+    })
+  }
+
+  async saveCevap(){
+    if(this.formCevap.invalid){
+      return;
+    }
+    await this.cevapService.createUpdateCevapByInput(this.formCevap.value).subscribe(()=>{
+      this.formCevap.reset();
+      this.bilgileriGetir();
+    })
+    this.cevapService.getCevapListBySoruId(this.formCevap.value.soruId).subscribe((res)=>{
+      this.cevapList=res;
     })
   }
 }
