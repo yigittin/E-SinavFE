@@ -1,4 +1,5 @@
 import type { AuditedEntityDto, FullAuditedEntityDto } from '@abp/ng.core';
+import type { OgrenciCevapDto } from '../ogrenci-dtos/models';
 
 export interface CevapCrudDto extends FullAuditedEntityDto<string> {
 }
@@ -38,6 +39,14 @@ export interface CreateUpdateSoruDto {
   puan: number;
 }
 
+export interface OgrenciSinavDto {
+  ogrenciId?: string;
+  sinavId?: string;
+  baslangic?: string;
+  bitis?: string;
+  ogrenciCevaplar: OgrenciCevapDto[];
+}
+
 export interface SinavCrudDto extends AuditedEntityDto<string> {
 }
 
@@ -61,4 +70,5 @@ export interface SoruDto {
   sinavId?: string;
   cevapList: CevapDto[];
   puan: number;
+  cevapCount: number;
 }

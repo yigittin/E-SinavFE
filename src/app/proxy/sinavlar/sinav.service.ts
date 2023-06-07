@@ -1,7 +1,7 @@
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
-import type { CompleteSinavDto, CreateUpdateSinavDto, SinavCrudDto, SinavDto } from '../sinav-dtos/models';
+import type { CompleteSinavDto, CreateUpdateSinavDto, OgrenciSinavDto, SinavCrudDto, SinavDto } from '../sinav-dtos/models';
 
 @Injectable({
   providedIn: 'root',
@@ -61,6 +61,14 @@ export class SinavService {
     { apiName: this.apiName,...config });
   
 
+  getOgrenciSinavSureBySinavId = (sinavId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, OgrenciSinavDto>({
+      method: 'GET',
+      url: `/api/app/sinav/ogrenci-sinav-sure/${sinavId}`,
+    },
+    { apiName: this.apiName,...config });
+  
+
   getPagedSiniflarByInputAndFilter = (input: PagedAndSortedResultRequestDto, filter?: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, PagedResultDto<SinavDto>>({
       method: 'GET',
@@ -90,6 +98,14 @@ export class SinavService {
     this.restService.request<any, SinavDto>({
       method: 'GET',
       url: `/api/app/sinav/${id}/sinav-single`,
+    },
+    { apiName: this.apiName,...config });
+  
+
+  sinavBaslatBySinavId = (sinavId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, void>({
+      method: 'POST',
+      url: `/api/app/sinav/sinav-baslat/${sinavId}`,
     },
     { apiName: this.apiName,...config });
   
