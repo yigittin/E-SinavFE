@@ -1,6 +1,7 @@
 import { ConfirmationService } from '@abp/ng.theme.shared';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatRadioChange } from '@angular/material/radio';
 import { ActivatedRoute } from '@angular/router';
 import { DersService } from '@proxy/dersler';
 import { OgrenciSinavDto } from '@proxy/sinav-dtos';
@@ -41,5 +42,7 @@ export class SinavOgrenciComponent implements OnInit {
       })
     })
   }
-
+  radioButtonChange(data: MatRadioChange) {
+    console.log(data.value);
+}
 }

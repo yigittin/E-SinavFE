@@ -44,7 +44,7 @@ export interface OgrenciSinavDto {
   sinavId?: string;
   baslangic?: string;
   bitis?: string;
-  ogrenciCevaplar: OgrenciCevapDto[];
+  sinavSorular: SinavSoruCevapDto;
 }
 
 export interface SinavCrudDto extends AuditedEntityDto<string> {
@@ -61,6 +61,12 @@ export interface SinavDto {
   dersAdi?: string;
 }
 
+export interface SinavSoruCevapDto {
+  sinavId?: string;
+  ogrenciId?: string;
+  soruList: SoruDto[];
+}
+
 export interface SoruCrudDto extends AuditedEntityDto<string> {
 }
 
@@ -71,4 +77,5 @@ export interface SoruDto {
   cevapList: CevapDto[];
   puan: number;
   cevapCount: number;
+  ogrenciCevap: OgrenciCevapDto;
 }
