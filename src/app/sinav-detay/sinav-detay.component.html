@@ -23,7 +23,7 @@
                     Soru Listesi
                     <div class="text-end col col-md-6">
                         <div class="text-lg-end pt-2">
-                            <button id="create" class="btn btn-primary" type="button" (click)="open(content)">
+                            <button id="create" class="btn btn-sm btn-primary" type="button" (click)="open(content)">
                                 <i class="fa fa-plus me-1"></i>
                                 <span>Soru Ekle</span>
                             </button>
@@ -104,8 +104,8 @@
 <ng-template #contentCevapList let-modalCevapList>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title cevapListModal">Cevap Listesi</h4>
-        <button id="create" class="btn btn-primary" type="button" (click)="openCevap(contentCevap)">
-            <i class="fa fa-plus me-1"></i>
+        <button id="create" class="btn btn-primary" style="margin-left: 100px;" type="button" (click)="openCevap(contentCevap)">
+            <i class="fa fa-plus text-end"></i>
             <span>Cevap Ekle</span>
         </button>
         <button type="button" class="btn-close" aria-label="Close" (click)="modalCevapList.close()"></button>

@@ -18,28 +18,28 @@ function configureRoutes(routesService: RoutesService) {
       {
         path: '/bolumler',
         name: '::Study',
-        iconClass: 'fas fa-home',
+        iconClass: 'fas fa-graduation-cap',
         order: 2,
         layout: eLayoutType.application,
       },
       {
         path: '/dersler',
         name: '::Lecture',
-        iconClass: 'fas fa-home',
+        iconClass: 'fas fa-book',
         order: 3,
         layout: eLayoutType.application,
       },
       {
         path: '/siniflar',
         name: '::Class',
-        iconClass: 'fas fa-home',
+        iconClass: 'fas fa-users',
         order: 4,
         layout: eLayoutType.application,
       },
       {
         path: '/sinavlar',
         name: '::Exam',
-        iconClass: 'fas fa-home',
+        iconClass: 'fa fa-pencil',
         order: 5,
         layout: eLayoutType.application,
       }
