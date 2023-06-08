@@ -1,17 +1,29 @@
-
+<style>
+    .example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+    }
+    .example-radio-button {
+    margin: 10px;
+    }
+</style>
 <div class="card" >
         <div class="card-header">
             {{sinavComplete.bitis}}
         </div>
         <div class="card-body">
             <mat-tab-group>
-                <mat-tab *ngFor="let soru of sinavComplete.sinavSorular.soruList" label="1">
+                <mat-tab class=".example-radio-group" *ngFor="let soru of sinavComplete.sinavSorular.soruList" label="1">
                     {{soru.soruMetni}}
                     <div class="form-group" >
                         <mat-radio-group aria-label="Select an option" >
-                            <mat-radio-button *ngFor="let cevap of soru.cevapList" value="{{cevap.id}}" (change)="radioButtonChange($event)">
-                              {{cevap.cevapMetni}}
-                            </mat-radio-button>
+                            <div class="row">
+                                <mat-radio-button class="example-radio-button" *ngFor="let cevap of soru.cevapList" value="{{cevap.id}}" (change)='radioButtonChange($event,soru.id)'>
+                                  {{cevap.cevapMetni}}
+                                </mat-radio-button>
+                            </div>
                         </mat-radio-group>
                     </div>                    
                 </mat-tab>

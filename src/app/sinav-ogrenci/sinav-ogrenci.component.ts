@@ -42,7 +42,8 @@ export class SinavOgrenciComponent implements OnInit {
       })
     })
   }
-  radioButtonChange(data: MatRadioChange) {
-    console.log(data.value);
+  radioButtonChange(data: MatRadioChange,soruId:string) {
+    console.log(data.value,soruId);
+    this.sinavService.cevapIsaretleBySoruIdAndCevapId(soruId,data.value).subscribe();
 }
 }

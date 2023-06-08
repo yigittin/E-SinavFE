@@ -10,6 +10,15 @@ export class SinavService {
   apiName = 'Default';
   
 
+  cevapIsaretleBySoruIdAndCevapId = (soruId: string, cevapId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, void>({
+      method: 'POST',
+      url: '/api/app/sinav/cevap-isaretle',
+      params: { soruId, cevapId },
+    },
+    { apiName: this.apiName,...config });
+  
+
   create = (input: CreateUpdateSinavDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, SinavCrudDto>({
       method: 'POST',
