@@ -88,6 +88,14 @@ export class SinifService {
     { apiName: this.apiName,...config });
   
 
+  sinifAnasayfa = (config?: Partial<Rest.Config>) =>
+    this.restService.request<any, SinifInfoDto[]>({
+      method: 'POST',
+      url: '/api/app/sinif/sinif-anasayfa',
+    },
+    { apiName: this.apiName,...config });
+  
+
   sinifOgrenciCikarMultiByGuidSinifAndList = (guidSinif: string, list: string[], config?: Partial<Rest.Config>) =>
     this.restService.request<any, void>({
       method: 'POST',

@@ -38,14 +38,6 @@ export class DersService {
     { apiName: this.apiName,...config });
   
 
-  dersAnasayfa = (config?: Partial<Rest.Config>) =>
-    this.restService.request<any, void>({
-      method: 'POST',
-      url: '/api/app/ders/ders-anasayfa',
-    },
-    { apiName: this.apiName,...config });
-  
-
   dersOnaylaByGuidDers = (guidDers: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, void>({
       method: 'POST',
@@ -59,6 +51,14 @@ export class DersService {
     this.restService.request<any, DersDto>({
       method: 'GET',
       url: `/api/app/ders/${id}`,
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getDersAnasayfa = (config?: Partial<Rest.Config>) =>
+    this.restService.request<any, DersInfoDto[]>({
+      method: 'GET',
+      url: '/api/app/ders/ders-anasayfa',
     },
     { apiName: this.apiName,...config });
   

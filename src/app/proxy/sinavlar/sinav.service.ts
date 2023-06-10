@@ -111,6 +111,14 @@ export class SinavService {
     { apiName: this.apiName,...config });
   
 
+  sinavAnasayfa = (config?: Partial<Rest.Config>) =>
+    this.restService.request<any, SinavDto[]>({
+      method: 'POST',
+      url: '/api/app/sinav/sinav-anasayfa',
+    },
+    { apiName: this.apiName,...config });
+  
+
   sinavBaslatBySinavId = (sinavId: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, void>({
       method: 'POST',

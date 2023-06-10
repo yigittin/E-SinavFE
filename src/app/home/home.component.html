@@ -309,6 +309,102 @@
   </div>
 </div>
 
+<div class="card">
+  <div class="card-header">
+    {{ "::StudyList" | abpLocalization }}
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+          <thead class="bg-light">
+              <tr>
+                  <th>Bölüm Adı</th>
+                  <th>Onaylayan Kullanıcı</th>
+                  <th>Onaylandı Mı?</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let bolum of bolumList">                                
+                  <td>{{bolum.bolumAdi}}</td>
+                  <td>{{bolum.bolumOnayciAdi}}</td>
+                  <td>{{bolum.isOnaylandi}}</td>
+              </tr>
+          </tbody>
+      </table>
+    </div>    
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    {{ "::LectureList" | abpLocalization }}
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+          <thead class="bg-light">
+              <tr>
+                  <th>{{ "::LectureName" | abpLocalization }}</th>
+                  <th>{{ "::StudyName" | abpLocalization }}</th>
+                  <th>{{ "::ConfirmerName" | abpLocalization }}</th>
+                  <th>{{ "::isConfirmed" | abpLocalization }}</th> 
+                  <th>{{ "::Detail" | abpLocalization }}</th> 
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let ders of dersList">                                
+                  <td>{{ders.dersAdi}}</td>
+                  <td>{{ders.bolumName}}</td>
+                  <td>{{ders.dersOnayciAdi}}</td>
+                  <td>{{ders.isOnaylandi}}</td>
+                  <td>
+                    <a [routerLink]="'/ders-detay/'+(ders.id)" type="button" class="btn btn-sm bg-primary">
+                      <i class="fas fa-pencil-alt"></i>
+                      {{ '::Detail' | abpLocalization}}
+                    </a>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+    </div>    
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    {{ "::ClassList" | abpLocalization }}
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+          <thead class="bg-light">
+              <tr>
+                  <th>{{ "::ClassName" | abpLocalization }}</th>
+                  <th>{{ "::LectureName" | abpLocalization }}</th>
+                  <th>{{ "::ClassLimit" | abpLocalization }}</th>
+                  <th>{{ "::ConfirmerName" | abpLocalization }}</th>
+                  <th>{{ "::isConfirmed" | abpLocalization }}</th> 
+                  <th>{{ "::Detail" | abpLocalization }}</th> 
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let sinif of sinifList">                                
+                  <td>{{sinif.sinifAdi}}</td>
+                  <td>{{sinif.dersAdi}}</td>
+                  <td>{{sinif.sinifLimit}}</td>
+                  <td>{{sinif.onaylayanKullaniciAdi}}</td>
+                  <td>{{sinif.isOnaylandi}}</td>
+                  <td>
+                    <a [routerLink]="'/sinif-detaylar/'+(sinif.id)" type="button" class="btn btn-sm bg-primary">
+                      <i class="fas fa-pencil-alt"></i>
+                      {{ '::Detail' | abpLocalization}}
+                    </a>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+    </div>    
+  </div>
+</div>
 <ng-template #starterLinkTemplate let-context>
   <div class="col-lg-4 border-start">
     <div class="p-4">

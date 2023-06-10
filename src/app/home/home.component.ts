@@ -35,8 +35,19 @@ export class HomeComponent implements OnInit {
     this.authService.navigateToLogin();
   }
 
-  ngOnInit(){
-    this.dersService.dersAnasayfa().subscribe();
+  async ngOnInit(){
+    await this.dersService.getDersAnasayfa().subscribe(async (res)=>{
+      this.dersList=res;
+    })
+    await this.bolumService.bolumAnasayfa().subscribe(async (res)=>{
+      this.bolumList=res;
+    })
+    await this.sinifService.sinifAnasayfa().subscribe(async (res)=>{
+      this.sinifList=res;
+    })
+    await this.sinavService.sinavAnasayfa().subscribe(async (res)=>{
+      this.sinavList=res;
+    })
   }
   
 }

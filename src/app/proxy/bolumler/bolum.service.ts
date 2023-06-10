@@ -10,6 +10,14 @@ export class BolumService {
   apiName = 'Default';
   
 
+  bolumAnasayfa = (config?: Partial<Rest.Config>) =>
+    this.restService.request<any, BolumInfoDto[]>({
+      method: 'POST',
+      url: '/api/app/bolum/bolum-anasayfa',
+    },
+    { apiName: this.apiName,...config });
+  
+
   create = (input: CreateUpdateBolumDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, BolumDto>({
       method: 'POST',
