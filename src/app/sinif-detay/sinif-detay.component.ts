@@ -8,6 +8,7 @@ import { OgrenciSelectionDto } from '@proxy/ogrenci-dtos';
 import { SinifInfoDto } from '@proxy/sinif-dtos';
 import { SinifService } from '@proxy/siniflar';
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CurrentUserDto } from '@abp/ng.core';
 
 @Component({
   selector: 'app-sinif-detay',
@@ -52,7 +53,7 @@ export class SinifDetayComponent implements OnInit{
   }
   async addOgrenci(){
     let idList=Array.from(this.selectedRowIds);
-    this.sinifService.sinifOgrenciEkleMultiByListAndGuidSinif(idList,this.sinifDetay.id).subscribe();
+    await this.sinifService.sinifOgrenciEkleMultiByListAndGuidSinif(idList,this.sinifDetay.id).subscribe();
     await this.bilgileriGetir();
     this.selectedRowIds.clear();
   }

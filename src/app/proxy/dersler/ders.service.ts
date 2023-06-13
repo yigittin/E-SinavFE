@@ -104,6 +104,14 @@ export class DersService {
     { apiName: this.apiName,...config });
   
 
+  getIsOgrenci = (config?: Partial<Rest.Config>) =>
+    this.restService.request<any, boolean>({
+      method: 'GET',
+      url: '/api/app/ders/is-ogrenci',
+    },
+    { apiName: this.apiName,...config });
+  
+
   getList = (input: PagedAndSortedResultRequestDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, PagedResultDto<DersDto>>({
       method: 'GET',

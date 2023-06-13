@@ -1,5 +1,6 @@
-import { AuthService } from '@abp/ng.core';
+import { AuthService, ConfigStateService } from '@abp/ng.core';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BolumInfoDto, BolumService } from '@proxy/bolumler';
 import { DersInfoDto } from '@proxy/ders-dtos';
 import { DersService } from '@proxy/dersler';
@@ -29,6 +30,8 @@ export class HomeComponent implements OnInit {
     private sinifService:SinifService,
     private sinavService:SinavService,
     private bolumService:BolumService,
+    private config:ConfigStateService,
+    private _router:Router
     ) {}
 
   login() {
@@ -36,6 +39,13 @@ export class HomeComponent implements OnInit {
   }
 
   async ngOnInit(){
+    var isOgrenci:Boolean;
+    await this.dersService.getIsOgrenci().subscribe((res)=>{
+      isOgrenci=res;
+      if(isOgrenci===true){
+        this.navigateToFirst();
+      }
+    })
     await this.dersService.getDersAnasayfa().subscribe(async (res)=>{
       this.dersList=res;
     })
@@ -48,6 +58,9 @@ export class HomeComponent implements OnInit {
     await this.sinavService.sinavAnasayfa().subscribe(async (res)=>{
       this.sinavList=res;
     })
+    console.log(isOgrenci);
   }
-  
+  navigateToFirst() {
+    this._router.navigateByUrl('/home-ogrenci');
+  }
 }
