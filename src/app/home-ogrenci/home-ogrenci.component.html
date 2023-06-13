@@ -1,1 +1,44 @@
-<p>home-ogrenci works!</p>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    {{'::ExamList' | abpLocalization}}                    
+                </div>
+                
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>{{'::ExamName' | abpLocalization}}</th>
+                                <th>{{'::ExamStart' | abpLocalization}}</th>
+                                <th>{{'::ExamTime' | abpLocalization}}</th>
+                                <th>{{'::ExamPoint' | abpLocalization}}</th>
+                                <th>{{'::LectureName' | abpLocalization}}</th>
+                                <th style="width: 200px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let sinav of sinavList">                                
+                                <td>{{sinav.sinavAdi}}</td>
+                                <td>{{sinav.baslangicTarih}}</td>
+                                <td>{{sinav.sinavSure}}</td>
+                                <td>{{sinav.agirlik}}</td>
+                                <td>{{sinav.dersAdi}}</td>
+                                <td>{{sinav.dersAdi}}</td>
+                                <td>
+                                    <a [routerLink]="'/sinav-ogrenci/'+(sinav.id)" type="button" class="btn btn-sm bg-primary">
+                                      <i class="fas fa-pencil-alt"></i>
+                                      {{ '::Detail' | abpLocalization}}
+                                    </a>
+                                  </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+              
+            </div>
+        </div>
+    </div>

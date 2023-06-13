@@ -70,6 +70,14 @@ export class SinavService {
     { apiName: this.apiName,...config });
   
 
+  getOgrenciSinav = (config?: Partial<Rest.Config>) =>
+    this.restService.request<any, SinavDto[]>({
+      method: 'GET',
+      url: '/api/app/sinav/ogrenci-sinav',
+    },
+    { apiName: this.apiName,...config });
+  
+
   getOgrenciSinavSureBySinavId = (sinavId: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, OgrenciSinavDto>({
       method: 'GET',
