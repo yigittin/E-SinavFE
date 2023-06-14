@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   bolumList:BolumInfoDto[];
   sinavList:SinavDto[];
   isOgrenci:boolean;
+  currentUser:any;
   get hasLoggedIn(): boolean {
     return this.authService.isAuthenticated;
   }
@@ -31,34 +32,37 @@ export class HomeComponent implements OnInit {
     private sinavService:SinavService,
     private bolumService:BolumService,
     private config:ConfigStateService,
-    private _router:Router
+    private _router:Router,
+    
     ) {}
 
   login() {
     this.authService.navigateToLogin();
   }
 
-  async ngOnInit(){
-    var isOgrenci:Boolean;
-    await this.dersService.getIsOgrenci().subscribe((res)=>{
-      isOgrenci=res;
-      if(isOgrenci===true){
-        this.navigateToFirst();
-      }
-    })
-    await this.dersService.getDersAnasayfa().subscribe(async (res)=>{
-      this.dersList=res;
-    })
-    await this.bolumService.bolumAnasayfa().subscribe(async (res)=>{
-      this.bolumList=res;
-    })
-    await this.sinifService.sinifAnasayfa().subscribe(async (res)=>{
-      this.sinifList=res;
-    })
-    await this.sinavService.sinavAnasayfa().subscribe(async (res)=>{
-      this.sinavList=res;
-    })
-    console.log(isOgrenci);
+  ngOnInit(){
+    this.currentUser = this.config.getOne("currentUser");
+    if(this.currentUser.id!=null){
+      var isOgrenci:Boolean;
+       this.dersService.getIsOgrenci().subscribe((res)=>{
+        isOgrenci=res;
+        if(isOgrenci===true){
+          this.navigateToFirst();
+        }
+      })
+      this.dersService.getDersAnasayfa().subscribe((res)=>{
+        this.dersList=res;
+      })
+      this.bolumService.bolumAnasayfa().subscribe((res)=>{
+        this.bolumList=res;
+      })
+      this.sinifService.sinifAnasayfa().subscribe((res)=>{
+        this.sinifList=res;
+      })
+      this.sinavService.sinavAnasayfa().subscribe((res)=>{
+        this.sinavList=res;
+      })
+    }
   }
   navigateToFirst() {
     this._router.navigateByUrl('/home-ogrenci');

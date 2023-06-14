@@ -6,9 +6,9 @@
                     {{ "::Lecture" | abpLocalization }}
                 </h5>
             </div>
-            <div class="text-end col col-md-6">
+            <div class="text-end col col-md-6" >
                 <div class="text-lg-end pt-2">
-                  <button id="create" class="btn btn-primary" type="button" (click)="createDers()">
+                  <button id="create"  *abpPermission="'SanalVaka.Dersler.Create'" class="btn btn-primary" type="button" (click)="createDers()">
                     <i class="fa fa-plus me-1"></i>
                     <span>{{ "::NewLecture" | abpLocalization }}</span>
                   </button>
@@ -57,7 +57,7 @@
             <ngx-datatable-column [name]="'::isConfirmed' | abpLocalization" prop="isOnaylandi"></ngx-datatable-column>
             <ngx-datatable-column [name]="'::Detail' | abpLocalization">
               <ng-template let-row="row" ngx-datatable-cell-template>
-                <a [routerLink]="'../ders-detay/'+(row.id)" type="button" class="btn btn-sm bg-primary">
+                <a [routerLink]="'../ders-detay/'+(row.id)" type="button" class="btn btn-sm bg-primary" *abpPermission="'SanalVaka.Dersler.Create'">
                   <i class="fas fa-pencil-alt"></i>
                   {{ '::Detail' | abpLocalization}}
                 </a>
